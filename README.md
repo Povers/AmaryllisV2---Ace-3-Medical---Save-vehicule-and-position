@@ -5,4 +5,6 @@ Dans ce dépot se trouve les sources d'Amaryllis. Merci de ne pas retirer les cr
 
 This is the source of Amaryllis. Please, don't remove the credits in the files.
 
+Povers / Artur Popov
+
 
