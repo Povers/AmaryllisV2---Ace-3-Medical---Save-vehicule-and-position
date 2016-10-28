@@ -1,0 +1,229 @@
+author = "Tonic et Amaryllis";
+onLoadName = "Amaryllis";
+onLoadMission = "Développé par Tonic et Amaryllis";
+joinUnassigned = 1;
+respawn = BASE;
+respawndelay = 2;
+disabledAI = 1;
+disableChannels[] = {0,1,2,3,4,5,6};
+enableDebugConsole = 1;
+respawnDialog = 0;
+
+showHUD[] = {
+	true,	// Scripted HUD (same as showHUD command)
+	true,	// Vehicle + soldier info
+	false,	// Vehicle radar [HIDDEN]
+	true,	// Vehicle compass [HIDDEN]
+	false,	// Tank direction indicator
+	false,	// Commanding menu
+	false,	// Group Bar
+	true,	// HUD Weapon Cursors
+	false	// HUD Squad Radar
+};
+
+class Header
+{
+	gameType = RPG;
+	minPlayers = 1;
+	maxPlayers = 100;
+};
+
+wreckManagerMode = 1;
+wreckLimit = 15;
+wreckRemovalMinTime = 360;
+wreckRemovalMaxTime = 720;
+corpseManagerMode = 1;
+corpseLimit = 15;
+corpseRemovalMinTime = 10;
+corpseRemovalMaxTime = 60;
+#include "dialog\MasterHandler.h"
+#include "infiSTAR_AdminMenu.hpp"
+
+class RscTitles
+{
+	#include "dialog\ui.hpp"
+	#include "dialog\progress.hpp"
+	#include "dialog\hud_nameTags.h"
+
+
+};
+
+class CfgFunctions
+{
+	#include "Functions.h"
+};
+
+class CfgSounds
+{
+	sounds[] = {};
+	class SirenLong
+	{
+		name = "SirenLong";
+		sound[] = {"\sounds\Siren_Long.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class tazersound
+	{
+		name = "Tazersound";
+		sound[] = {"\sounds\tazer.ogg", 0.25, 1};
+		titles[] = {};
+	};
+	
+	class flashbang
+	{
+		name = "flashbang";
+		sound[] = {"\sounds\flashbang.ogg", 1.0, 1};
+		titles[] = {};
+	};
+    
+    class succes
+	{
+		name = "succes";
+		sound[] = {"\sounds\Succes.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class error
+	{
+		name = "error";
+		sound[] = {"\sounds\Error.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class axe
+	{
+		name = "axe";
+		sound[] = {"\sounds\axe.ogg", 1.0, 1};
+		titles[] = {};
+	};
+};
+
+class CfgDebriefing
+{
+	class NotWhitelisted
+	{
+		title = "Mauvais Slot";
+		subtitle = "Vous n'êtes pas whitelist";
+		description = "Vous n'êtes pas whitelist pour ce slot, prenez en un autre.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class Blacklisted
+	{
+		title = "Mauvais Slot";
+		subtitle = "Vous êtes radié de l'Armée";
+		description = "Vous êtes radié de l'Armée, par conséquent nous ne pouvez plus utiliser ce slot.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class NotWomen
+	{
+		title = "Chacun son sexe !";
+		subtitle = "Vous n'êtes pas autorisé à utiliser un personnage féminin";
+		description = "Si vous souhaitez utiliser un personnage féminin, merci de vous rapprocher du staff.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class NewName
+	{	
+	title = "Changement de nom";
+	subTitle = "Le changement de nom n'est pas autorisé";
+	description = "Vous ne pouvez pas changer de nom sans passer par le staff, merci d'effectuer une demande via le forum.";
+	pictureBackground = "";
+	picture = "";
+	pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class ServerTS
+	{
+		title = "Task Force Radio";
+		subtitle = "Le TFR n'est pas une option !";
+		description = "Vous devez être sur l'onglet de notre teamspeak pour pouvoir jouer.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+};
+
+class CfgNotifications
+{
+	class MedicalRequestEmerg
+	{
+		title = "Demande SMA";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+	
+	class DeliveryAssigned
+	{
+		title = "Delivery Job Accepted";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+	
+	class DeliveryFailed
+	{
+		title = "Delivery Job Failed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
+		description = "%1";
+		duration = 7;
+		priority = 7;
+	};
+	
+	class DeliverySucceeded
+	{
+		title = "Delivery Job Completed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+	};
+	
+	class TextMessage
+	{
+		title = "Received A Text Message";
+		iconPicture = "icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class PoliceDispatch
+	{
+		title = "911 Dispatch Center";
+		iconPicture = "icons\messagepolice.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class AdminDispatch
+	{
+		title = "Admin Dispatch Center";
+		iconPicture = "icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class AdminMessage
+	{
+		title = "Admin Message";
+		iconPicture = "icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+
+	
+};

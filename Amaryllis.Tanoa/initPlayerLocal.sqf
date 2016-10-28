@@ -1,0 +1,21 @@
+/*
+	File: initPlayerLocal.sqf
+	
+	Description:
+	Starts the initialization of the player.
+*/
+
+waitUntil {sleep 0.1;time > 10 && alive player};
+player setVariable ["tf_voiceVolume", 0, true];
+player setVariable ["tf_globalVolume", 0];
+player setVariable ["tf_unable_to_use_radio", true];
+"BIS_fnc_MP_packet" addPublicVariableEventHandler {_this call life_fnc_MPexec};
+if(!hasInterface) exitWith {}; //This is a headless client, he doesn't need to do anything but keep being headless..
+#define __CONST__(var1,var2) var1 = compileFinal (if(typeName var2 == "STRING") then {var2} else {str(var2)})
+__CONST__(BIS_fnc_endMission,BIS_fnc_endMission);
+[] execVM "core\init.sqf";
+
+//Execute JIP code.
+if((_this select 1)) then {
+	[] execVM "core\jip.sqf";
+};
