@@ -10,6 +10,8 @@ La seule modification utile est:
 
 Remplacement de "_hintText = format[localize "STR_voice_volume", _localName]; [parseText (_hintText), 5] call TFAR_fnc_showHint;"       par "[] call life_fnc_hudUpdate;" dans le fichier fn_onSpeakVolumeChange.sqf
 
+Aucun modpack ne sera distribué.
+
 # EN
 This is the source of Amaryllis. Please, don't remove the credits in the files.
 
